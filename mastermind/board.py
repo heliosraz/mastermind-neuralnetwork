@@ -27,7 +27,6 @@ class MastermindBoard:
             for item in self.items[c]:
                 print(str(item), end=" ")
             print(str(self.checkmatches(self.items[c]))+"/"+str(self.checkclose(self.items[c])))
-        print("---------------")
         return
 
     def checkmatches(self, checking: List[str])-> int:

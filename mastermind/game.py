@@ -15,7 +15,6 @@ class Game:
 
     def quit(self) -> None:
         self.end_game = 1
-        os.system('cls' if os.name == 'nt' else 'clear')
 
     def run_game(self) -> None:
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -47,6 +46,7 @@ class Game:
             a=str(input('Ready? (y/n): '))
             if a=="quit":
                 self.quit()
+                os.system('cls' if os.name == 'nt' else 'clear')
                 return
         self.board.print_board()
         while not self.end_game:
@@ -54,7 +54,7 @@ class Game:
         a = str(input('Play again? (y/n): '))
         while 1:
             if a=="quit":
-                self.quit()
+                os.system('cls' if os.name == 'nt' else 'clear')
                 return
             if a=='y' or a=='Y':
                 self.run_game()
@@ -63,6 +63,7 @@ class Game:
                 print("Input not valid")
                 a = str(input('Play again? (y/n): '))
             else:
+                os.system('cls' if os.name == 'nt' else 'clear')
                 return
 
 
@@ -71,6 +72,7 @@ class Game:
         if guess==[' ',' ',' ',' ']:
             self.quit()
             print("You quit the game.")
+            print(f"Correct code:{self.board.key}")
             return
         if self.check_win(guess):
             print('You won the game!')
@@ -80,11 +82,14 @@ class Game:
             self.turn+=1
         if self.turn==13:
             print("You lost.")
+            print(f"Correct code:{self.board.key}")
             self.quit()
             return
 
     def take_turn(self)->List[str]:
         output=[]
+        print('\nCharacters: B, R, C, W, P, G')
+        print("-----------------------------")
         a = str(input('Enter your guess: ')).upper()
         if a.lower()=="quit":
             return [' ',' ',' ',' ']
@@ -106,7 +111,7 @@ class Game:
             if char==" ":
                 continue
             elif char not in self.code:
-                print('Use the following characters: B, R, C, W, P, G.')
+                print('Use the given characters.')
                 return False
             else:
                 characters+=1
