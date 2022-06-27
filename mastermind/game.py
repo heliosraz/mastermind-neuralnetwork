@@ -8,7 +8,7 @@ class Game:
     def __init__(self):
         self.end_game = 0
         self.code=['B','R','C','W','P','G']
-        self.turn=0
+        self.turn=1
         self.board=()
         self.run_game()
 
@@ -16,7 +16,8 @@ class Game:
         self.end_game = 1
 
     def run_game(self) -> None:
-        self.turn=0
+        self.end_game = 0
+        self.turn=1
         key= []
         for index in range(4):
             symbol=self.code[random.randrange(1,6)]
@@ -26,31 +27,38 @@ class Game:
         while not self.end_game:
             self.play_turn()
         a = str(input('Play again? (y/n): '))
-        if "y" in a or "Y" in a:
-            self.run_game()
+        while 1:
+            if a=='y' or a=='Y':
+                self.run_game()
+                return
+            elif a != "n":
+                print("Input not valid")
+                a = str(input('Play again? (y/n): '))
+            else:
+                return
+
 
     def play_turn(self) -> None:
         guess= self.take_turn()
         if self.check_win(guess):
-            print(f'You won the game!')
+            print('You won the game!')
             self.quit()
             return
         else:
             self.turn+=1
-        if self.turn==12:
+        if self.turn==13:
             print("You lost.")
             self.quit()
 
     def take_turn(self)->List[str]:
         output=[]
-        a = str(input('Enter your guess: '))
+        a = str(input('Enter your guess: ')).upper()
         while not self.check_valid_guess(a):
             print('Not a valid guess.')
-            a = str(input('Enter your guess: '))
+            a = str(input('Enter your guess: ')).upper()
         for text in a:
             if text !=" ":
                 output.append(text)
-        self.turn+=1
         self.board.set_row(output, self.turn)
         return output
 
