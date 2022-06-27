@@ -10,7 +10,6 @@ class MastermindBoard:
         self.blank = 'x'
         self.items = [[self.blank for c in range(self.cols)] for r in range(self.rows)]
         self.key= key
-        self.print_board()
 
     def set_row(self, item: List[str], row: int) -> List[List[str]]:
         row=row-1
