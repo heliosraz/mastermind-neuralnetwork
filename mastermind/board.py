@@ -1,6 +1,7 @@
 # Place your Board class in this file
 from typing import Union, List
 import numpy as np
+import os
 
 class MastermindBoard:
     def __init__(self, key: List[str]):
@@ -19,6 +20,7 @@ class MastermindBoard:
         return self.items
 
     def print_board(self) -> None:
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("          R/W")
         for c in range(self.rows):
             print(str(c+1), end=" ")
