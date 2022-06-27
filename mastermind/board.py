@@ -21,7 +21,7 @@ class MastermindBoard:
 
     def print_board(self) -> None:
         os.system('cls' if os.name == 'nt' else 'clear')
-        print("          R/W")
+        print("          L/R")
         for c in range(self.rows):
             print(str(c+1), end=" ")
             for item in self.items[c]:
